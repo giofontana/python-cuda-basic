@@ -11,8 +11,8 @@ LABEL io.k8s.description="S2I builder for python with CUDA drivers" \
 #yum install epel-release
 #yum install dkms
 
-RUN yum install epel-release && \
-    yum install dkms && \
+RUN yum -y install epel-release && \
+    yum -y install dkms && \
     wget http://developer.download.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda-repo-rhel7-10-1-local-10.1.243-418.87.00-1.0-1.x86_64.rpm && \
     rpm -i cuda-repo-rhel7-10-1-local-10.1.243-418.87.00-1.0-1.x86_64.rpm && \
     yum clean all && \
