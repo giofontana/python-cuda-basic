@@ -8,10 +8,14 @@ LABEL io.k8s.description="S2I builder for python with CUDA drivers" \
       io.openshift.tags="builder,python,cuda" 
 #      io.openshift.s2i.scripts-url="image:///opt/app-root/builder"
 
-RUN yum-config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-rhel7.repo && \
+RUN wget http://developer.download.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda-repo-rhel7-10-1-local-10.1.243-418.87.00-1.0-1.x86_64.rpm && \
+    rpm -i cuda-repo-rhel7-10-1-local-10.1.243-418.87.00-1.0-1.x86_64.rpm && \
     yum clean all && \
-    yum -y install nvidia-driver-latest-dkms 
-    
-#    cuda
+    yum -y install nvidia-driver-latest-dkms cuda
+
+
+#yum-config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-rhel7.repo && \
+#    yum clean all && \
+#    yum -y install nvidia-driver-latest-dkms cuda
 
 CMD nvidia-smi
