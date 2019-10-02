@@ -29,6 +29,8 @@ RUN rpm -ivh https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_
 #    yum clean all && \
 #    yum -y install nvidia-driver-latest-dkms cuda
 
-ADD cuda-test.sh /
+ADD cuda-test.sh /tmp
 
-CMD ["/cuda-test.sh"]
+RUN ["chmod", "+x", "/tmp/cuda-test.sh"]
+
+ENTRYPOINT ["/tmp/cuda-test.sh"] 
